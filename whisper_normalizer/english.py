@@ -466,10 +466,8 @@ class EnglishSpellingNormalizer:
     """
 
     def __init__(self):
-        response = urllib.request.urlopen(
-            "https://raw.githubusercontent.com/openai/whisper/main/whisper/normalizers/english.json"
-        )
-        self.mapping = json.loads(response.read())
+        with open('normalizers/english.json') as english_normalization_dict:
+            self.mapping = json.load(english_normalization_dict)
 
     def __call__(self, s: str):
         return " ".join(self.mapping.get(word, word) for word in s.split())
