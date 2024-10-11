@@ -11,9 +11,7 @@ import re
 from fractions import Fraction
 from typing import Iterator, List, Match, Optional, Union
 
-# Fixing Import error raised in issue #3
-import urllib
-import urllib.request
+import importlib.resources
 
 from more_itertools import windowed
 
@@ -466,7 +464,7 @@ class EnglishSpellingNormalizer:
     """
 
     def __init__(self):
-        with open('normalizers/english.json', "r") as english_normalization_dict:
+        with importlib.resources.open_text('whisper_normalizer.normalizers', 'english.json') as english_normalization_dict:
             self.mapping = json.load(english_normalization_dict)
             print(self.mapping)
 
