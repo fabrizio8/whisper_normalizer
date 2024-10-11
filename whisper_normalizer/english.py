@@ -466,8 +466,9 @@ class EnglishSpellingNormalizer:
     """
 
     def __init__(self):
-        with open('normalizers/english.json') as english_normalization_dict:
+        with open('normalizers/english.json', "r") as english_normalization_dict:
             self.mapping = json.load(english_normalization_dict)
+            print(self.mapping)
 
     def __call__(self, s: str):
         return " ".join(self.mapping.get(word, word) for word in s.split())
